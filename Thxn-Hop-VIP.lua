@@ -1,4 +1,4 @@
- --[[ 🛡️ WHITELIST POR NOMBRE DE USUARIO ]]--
+  --[[ 🛡️ WHITELIST POR NOMBRE DE USUARIO ]]--
 local Players = game:GetService("Players")
 local allowedUsernames = {
     "memes17827",
@@ -41,6 +41,12 @@ local running = false
 -- UI principal
 local ScreenGui = Instance.new("ScreenGui", CoreGui)
 ScreenGui.Name = "THXNModsGUI"
+
+-- 🔊 Sonido de alerta cuando se encuentra un objetivo
+local Sound = Instance.new("Sound", ScreenGui)
+Sound.SoundId = "rbxassetid://3165700530"
+Sound.Volume = 1
+Sound.Name = "TargetFoundSound"
 
 local DraggableButton = Instance.new("TextButton", ScreenGui)
 DraggableButton.Size = UDim2.new(0, 220, 0, 50)
@@ -188,6 +194,9 @@ local function runSearch()
             for _, target in pairs(targets) do
                 markTarget(target)
             end
+
+            -- 🔊 Reproduce sonido al encontrar objetivo
+            Sound:Play()
             DraggableButton.Text = "🎯 Objetivo encontrado"
 
             askToContinue(function(shouldContinue)
