@@ -3,6 +3,7 @@ local Players = game:GetService("Players")
 local allowedUsernames = {
     "memes17827",
     "Elmasv3rgud04",
+    "ocpa38090",
     "ArmandoPuentes1904"
 }
 local allowedUserIds = {}
@@ -54,7 +55,7 @@ DraggableButton.Size = UDim2.new(0, 220, 0, 50)
 DraggableButton.Position = UDim2.new(1, -240, 0, 120)
 DraggableButton.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 DraggableButton.BackgroundTransparency = 0.2
-DraggableButton.Text = "THXN Mods 😈"
+DraggableButton.Text = "Iniciar THXN Hop 😈"
 DraggableButton.TextSize = 20
 DraggableButton.TextColor3 = Color3.new(1, 0, 0)
 DraggableButton.Font = Enum.Font.GothamBold
@@ -206,7 +207,7 @@ local function runSearch()
                     hop()
                 else
                     running = false
-                    DraggableButton.Text = "THXN Mods 😈"
+                    DraggableButton.Text = "Iniciar THXN Hop 😈"
                 end
             end)
 
@@ -224,7 +225,7 @@ DraggableButton.MouseButton1Click:Connect(function()
         DraggableButton.Text = "⛔ Detener búsqueda"
         task.spawn(runSearch)
     else
-        DraggableButton.Text = "THXN Mods 😈"
+        DraggableButton.Text = "IniciarTHXN Hop 😈"
     end
 end)
 
