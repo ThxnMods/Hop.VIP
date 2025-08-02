@@ -4,7 +4,8 @@ local allowedUsernames = {
     "memes17827",
     "Elmasv3rgud04",
     "ocpa38090",
-    "ArmandoPuentes1904"
+    "ArmandoPuentes1904",
+    "Lmited_017"
 }
 local allowedUserIds = {}
 
