@@ -1,4 +1,4 @@
- --[[ 🛡️ WHITELIST POR NOMBRE DE USUARIO ]]--
+  --[[ 🛡️ WHITELIST POR NOMBRE DE USUARIO ]]--
 local Players = game:GetService("Players")
 local allowedUsernames = {
     "memes17827",
@@ -25,18 +25,28 @@ end
 
 --[[ 🎯 CONFIGURACIÓN ]]--
 local TARGET_NAMES = {
-    "La Vacca Saturno Saturnita", , "Los Tralaleritos",
+    "La Vacca Saturno Saturnita", "Los Tralaleritos",
     "Las Tralaleritas", "Graipuss Medussi", "La Grande Combinasion",
     "Nuclearo Dinossauro", "Garama and Madundung", "Torrtuginni Dragonfrutini",
-    "Pot Hotspot", "Las Vaquitas Saturnitas", "Las Combinasionas"
+    "Pot Hotspot", "Las Vaquitas Saturnitas", "Los Combinasionas"
 }
 
+local SOUND_ID = "rbxassetid://3165700530"
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
 local CoreGui = game:GetService("CoreGui")
 local PlaceId = game.PlaceId
 local triedServers = {}
 local running = false
+
+-- Sonido de objetivo encontrado
+local function playSound()
+    local sound = Instance.new("Sound", workspace)
+    sound.SoundId = SOUND_ID
+    sound.Volume = 2
+    sound:Play()
+    game:GetService("Debris"):AddItem(sound, 5)
+end
 
 -- UI principal
 local ScreenGui = Instance.new("ScreenGui", CoreGui)
@@ -55,7 +65,6 @@ DraggableButton.BorderSizePixel = 0
 DraggableButton.AutoButtonColor = false
 DraggableButton.Active = true
 DraggableButton.Draggable = true
-DraggableButton.ClipsDescendants = true
 
 Instance.new("UICorner", DraggableButton).CornerRadius = UDim.new(0, 12)
 Instance.new("UIStroke", DraggableButton).Color = Color3.fromRGB(0, 255, 255)
@@ -188,14 +197,15 @@ local function runSearch()
             for _, target in pairs(targets) do
                 markTarget(target)
             end
+            playSound()
             DraggableButton.Text = "🎯 Objetivo encontrado"
 
+            running = false
             askToContinue(function(shouldContinue)
                 if shouldContinue then
                     running = true
                     hop()
                 else
-                    running = false
                     DraggableButton.Text = "Iniciar THXN Hop 😈"
                 end
             end)
@@ -218,10 +228,14 @@ DraggableButton.MouseButton1Click:Connect(function()
     end
 end)
 
--- Auto-ejecución tras hop
+-- Auto-ejecución total al iniciar
 local TeleportData = TeleportService:GetLocalPlayerTeleportData()
 if TeleportData and TeleportData["_fromTHXN"] then
     running = true
     DraggableButton.Text = "⛔ Detener búsqueda"
     task.delay(2, runSearch)
+elseif not TeleportData then
+    running = true
+    DraggableButton.Text = "⛔ Detener búsqueda"
+    task.spawn(runSearch)
 end
