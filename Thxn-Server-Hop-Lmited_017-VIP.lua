@@ -2,7 +2,8 @@
 local Players = game:GetService("Players")
 local allowedUsernames = {
     "memes17827",
-    "Lmited_017"
+    "Lmited_017",
+    "Elmasv3rgud04"
 }
 local allowedUserIds = {}
 
